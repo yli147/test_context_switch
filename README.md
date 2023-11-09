@@ -9,10 +9,9 @@ cd qemu
 make -j $(nproc)
 
 cd $WORKDIR
-git clone https://github.com/Penglai-Enclave/opensbi.git -b dev-standalonemm-rpmi
+git clone https://github.com/yli147/opensbi.git -b context_switch
 cd opensbi
-CROSS_COMPILE=riscv64-linux-gnu- make FW_PIC=n PLATFORM=generic
-cp build/platform/generic/firmware/fw_dynamic.elf $WORKDIR
+CROSS_COMPILE=riscv64-linux-gnu- make PLATFORM=generic
 
 cd $WORKDIR
 git clone https://github.com/yli147/test_context_switch.git
@@ -20,5 +19,5 @@ cd test_context_switch
 ./build.sh
 
 cd $WORKDIR
-./qemu/build/qemu-system-riscv64 -nographic -machine virt -bios ./fw_dynamic.elf -kernel build/nsdomain/hello -device loader,file=build/sdomain/hello.bin,addr=0x80C00000
+./qemu/build/qemu-system-riscv64 -nographic -machine virt -bios ./opensbi/build/platform/generic/firmware/fw_jump.bin -kernel test_context_switch/build/nsdomain/hello -device loader,file=test_context_switch/build/sdomain/hello.bin,addr=0x80C00000
 ```
