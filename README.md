@@ -8,6 +8,8 @@ cd qemu
 ./configure --target-list=riscv64-softmmu
 make -j $(nproc)
 
+
+
 cd $WORKDIR
 git clone https://github.com/yli147/opensbi.git -b context_switch
 cd opensbi
@@ -17,7 +19,17 @@ cd $WORKDIR
 git clone https://github.com/yli147/test_context_switch.git
 cd test_context_switch
 ./build.sh
+sudo apt-get install device-tree-compiler
+dtc -I dts -O dtb -o qemu-virt-new.dtb qemu-virt.dts
+
+[Or if you want to customize the qemu-virt-new.dtb by yourself]
+cd $WORKDIR
+./qemu/build/qemu-system-riscv64 -nographic -machine virt,dumpdtb=qemu-virt.dtb -bios ./opensbi/build/platform/generic/firmware/fw_jump.bin
+sudo apt-get install device-tree-compiler
+dtc -I dtb -O dts -o qemu-virt.dts qemu-virt.dtb
+vim qemu-virt.dts  <== Modify the 
+dtc -I dts -O dtb -o qemu-virt-new.dtb qemu-virt.dts
 
 cd $WORKDIR
-./qemu/build/qemu-system-riscv64 -nographic -machine virt -bios ./opensbi/build/platform/generic/firmware/fw_jump.bin -kernel test_context_switch/build/nsdomain/hello -device loader,file=test_context_switch/build/sdomain/hello.bin,addr=0x80C00000
+./qemu/build/qemu-system-riscv64 -nographic -machine virt -bios ./opensbi/build/platform/generic/firmware/fw_jump.bin -dtb ./test_context_switch/qemu-virt-new.dtb -kernel test_context_switch/build/nsdomain/hello -device loader,file=test_context_switch/build/sdomain/hello.bin,addr=0x80C00000
 ```
