@@ -26,7 +26,7 @@ cd $WORKDIR
 ./qemu/build/qemu-system-riscv64 -nographic -machine virt,dumpdtb=qemu-virt.dtb -bios ./opensbi/build/platform/generic/firmware/fw_jump.bin
 sudo apt-get install device-tree-compiler
 dtc -I dtb -O dts -o qemu-virt.dts qemu-virt.dtb
-vim qemu-virt.dts  <== Modify the 
+vim qemu-virt.dts  <== Modify this file 
 dtc -I dts -O dtb -o qemu-virt-new.dtb qemu-virt.dts
 
 cd $WORKDIR
