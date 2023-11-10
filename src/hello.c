@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #define SBI_EXT_0_1_CONSOLE_PUTCHAR		0x1
 #define SBI_EXT_TEST   0x54455354
 #define SBI_EXT_SECURE_ENTER 0x0
