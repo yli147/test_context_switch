@@ -9,7 +9,7 @@ cd qemu
 make -j $(nproc)
 
 cd $WORKDIR
-git clone https://github.com/yli147/opensbi.git -b context_switch
+git clone https://github.com/Penglai-Enclave/opensbi.git -b context_switch
 cd opensbi
 CROSS_COMPILE=riscv64-linux-gnu- make PLATFORM=generic
 
