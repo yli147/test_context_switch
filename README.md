@@ -8,8 +8,6 @@ cd qemu
 ./configure --target-list=riscv64-softmmu
 make -j $(nproc)
 
-
-
 cd $WORKDIR
 git clone https://github.com/yli147/opensbi.git -b context_switch
 cd opensbi
