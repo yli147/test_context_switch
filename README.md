@@ -2,7 +2,7 @@
 
 This is a simple test application to test the new opensbi domain context switch feature
 ```
-git clone https://github.com/yli147/qemu.git -b dev-standalonemm-rpmi
+git clone https://github.com/qemu/qemu.git -b v8.1.2
 export WORKDIR=`pwd`
 cd qemu
 ./configure --target-list=riscv64-softmmu
