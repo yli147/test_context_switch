@@ -66,7 +66,7 @@
 				next-arg1 = <0x0 0x81F80000>;
 				next-addr = <0x0 0x80C00000>;
 				next-mode = <0x1>;
-                reentrant;
+                context_mgmt_enabled;
 			};
 		};
 	};
