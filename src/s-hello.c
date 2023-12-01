@@ -81,6 +81,7 @@ void main(int hartid, int cold_boot_hartid)
 
     while (1) {
         const char *t = s;
+	s[5] = '0' + hartid;
         while (*t) sbi_console_putchar(*t++);
         sbi_domain_secure_exit();
     }
